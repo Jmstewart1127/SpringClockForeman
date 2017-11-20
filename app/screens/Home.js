@@ -45,9 +45,6 @@ const styles = {
     paddingTop: 10,
   },
 
-  outerScreen: {
-
-  }
 }
 
 export default Home;
