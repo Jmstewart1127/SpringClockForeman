@@ -95,7 +95,7 @@ const styles = {
 
   changeId: {
     flexDirection: 'row',
-    marginTop: 100,
+    marginTop: 160,
     justifyContent: 'center',
   },
 
