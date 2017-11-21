@@ -1,6 +1,12 @@
 package com.testproject;
 
 import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactPackage;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Arrays;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +18,5 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "TestProject";
     }
+
 }
