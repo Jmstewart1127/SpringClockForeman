@@ -140,7 +140,7 @@ class Location extends Component {
   }
 
   componentWillMount() {
-     this.timer = setInterval(()=> this._getCurrentLocation(), 10000);
+     this.timer = setInterval(()=> this._getCurrentLocation(), 5000);
   }
 
   render() {

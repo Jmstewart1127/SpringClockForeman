@@ -1,4 +1,4 @@
-package com.testproject.nativemodules;
+package com.springclock.nativemodules;
 
 import android.widget.Toast;
 
