@@ -10,6 +10,7 @@ import Location           from '../components/Location.js';
 import AddressLocation    from '../components/AddressLocation.js';
 import EmployeeStatus     from '../components/EmployeeStatus.js';
 import Refresh            from '../components/Refresh.js';
+import Jobs               from '../components/Jobs.js';
 
 class AppHome extends Component {
   constructor(props) {
@@ -31,8 +32,7 @@ class AppHome extends Component {
            this.setState({
              userId: true
            });
-         }
-         else {
+         } else {
            this.setState({
              userId: false
            });
@@ -62,7 +62,9 @@ class AppHome extends Component {
       return (
         <View style={ styles.outerScreen }>
           <Text style={ styles.componentPadding }></Text>
+          <Jobs></Jobs>
           <EmployeeStatus></EmployeeStatus>
+          <EmployeeList></EmployeeList>
           <Text style={ styles.componentPadding }></Text>
           <Text style={ styles.componentPadding }></Text>
           <TouchableOpacity
