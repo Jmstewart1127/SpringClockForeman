@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native';
-import EmployeeStatus from '../components/EmployeeStatus.js';
+import EmployeeStatus from '../components/EmployeeStatus';
+import Jobs from '../components/Jobs';
 
 class Location extends Component {
   constructor(props) {
