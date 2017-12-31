@@ -13,7 +13,7 @@ class Jobs extends Component {
     };
   }
   static navigationOptions = {
-    title: 'Jobs',
+    title: 'Welcome',
   };
 
   async _getJobs() {
@@ -44,6 +44,7 @@ class Jobs extends Component {
         </View>
       );
     }
+    const { navigate } = this.props.navigation;
     return (
       <View style={ styles.listStyle }>
         <Text style={ styles.userStyle } >
@@ -54,7 +55,9 @@ class Jobs extends Component {
             renderRow={(rowData) =>
               <TouchableOpacity
                 style={ styles.changeId }
-                onPress={() => navigate('Home')}
+                onPress={
+                  () => navigate('Receipts', { jobId: rowData.id })
+                }
               >
                 <Text>{rowData.jobAddress}</Text>
               </TouchableOpacity>
@@ -79,6 +82,7 @@ const styles = {
         shadowOffset: { width: 0, height: 0 },
         shadowRadius: 0,
         elevation: 15,
+        marginTop: 15,
       },
     
       userStyle: {
