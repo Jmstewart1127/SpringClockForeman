@@ -96,16 +96,15 @@ class Jobs extends Component {
             {"Receipts"}
           </Text>
           <ListView
-            style={styles.textStyle}
             dataSource={this.state.receipts}
             renderRow={(rowData) =>
               <Text style={styles.textStyle}>
-                <Text>{"Job ID: " + rowData.jobId}</Text>
-                <Text>{"Purchased From: " + rowData.purchasedFrom}</Text>
-                <Text>{"PO #: " + rowData.poNumber}</Text>
-                <Text>{"Part Name: " + rowData.partName}</Text>
-                <Text>{"Total: " + rowData.totalPrice}</Text>
-                <Text>{"Price Per Unit: " + rowData.price}</Text>
+                <Text>{"Job ID: " + rowData.jobId + "\n" }</Text>
+                <Text>{"Purchased From: " + rowData.purchasedFrom + "\n"}</Text>
+                <Text>{"PO #: " + rowData.poNumber + "\n"}</Text>
+                <Text>{"Part Name: " + rowData.partName + "\n"}</Text>
+                <Text>{"Total: " + rowData.totalPrice + "\n"}</Text>
+                <Text>{"Price Per Unit: " + rowData.price + "\n"}</Text>
               </Text>
             }
           />
@@ -154,7 +153,6 @@ const styles = {
     color: 'white',
     marginTop: 10,
     marginBottom: 10,
-    padding: 5,
   },
 
   buttonStyle: {
