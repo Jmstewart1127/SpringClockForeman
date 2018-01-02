@@ -74,6 +74,7 @@ class Jobs extends Component {
             {"Today's Job Site"}
           </Text>
           <ListView
+            style={styles.listStyle}
             dataSource={this.state.dataSource}
             renderRow={(rowData) =>
               <TouchableOpacity
@@ -82,7 +83,7 @@ class Jobs extends Component {
                   () => this._getReceipts(rowData.id)
                 }
               >
-                <Text>{rowData.jobAddress}</Text>
+                <Text style={styles.textStyle}>{rowData.jobAddress}</Text>
               </TouchableOpacity>
             }
           />
@@ -95,15 +96,16 @@ class Jobs extends Component {
             {"Receipts"}
           </Text>
           <ListView
+            style={styles.textStyle}
             dataSource={this.state.receipts}
             renderRow={(rowData) =>
-              <Text>
-                <Text style={styles.textStyle}>{"Job ID: " + rowData.jobId}</Text>
-                <Text style={styles.textStyle}>{"Purchased From: " + rowData.purchasedFrom}</Text>
-                <Text style={styles.textStyle}>{"PO #: " + rowData.poNumber}</Text>
-                <Text style={styles.textStyle}>{"Part Name: " + rowData.partName}</Text>
-                <Text style={styles.textStyle}>{"Total: " + rowData.totalPrice}</Text>
-                <Text style={styles.textStyle}>{"Price Per Unit: " + rowData.price}</Text>
+              <Text style={styles.textStyle}>
+                <Text>{"Job ID: " + rowData.jobId}</Text>
+                <Text>{"Purchased From: " + rowData.purchasedFrom}</Text>
+                <Text>{"PO #: " + rowData.poNumber}</Text>
+                <Text>{"Part Name: " + rowData.partName}</Text>
+                <Text>{"Total: " + rowData.totalPrice}</Text>
+                <Text>{"Price Per Unit: " + rowData.price}</Text>
               </Text>
             }
           />
@@ -152,6 +154,7 @@ const styles = {
     color: 'white',
     marginTop: 10,
     marginBottom: 10,
+    padding: 5,
   },
 
   buttonStyle: {
