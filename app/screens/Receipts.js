@@ -1,5 +1,5 @@
-import React, { Component }                        from 'react';
-import { ActivityIndicator, ListView, Text, View, ScrollView, AsyncStorage } from 'react-native';
+import React, { Component } from 'react';
+import { ActivityIndicator, ListView, Text, View, ScrollView, AsyncStorage, TouchableOpacity } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 class Receipts extends Component {
@@ -10,32 +10,34 @@ class Receipts extends Component {
       bizId: '',
       jobId: '',
     }
-    const { params } = this.props.navigation.state;
   }
+
   _getReceiptsTest() {
+    const { params } = this.props.navigation.state;
     if (!this.params) {
-        console.log('not gonna happen');
+      console.log('not gonna happen');
     } else {
-        fetch('https://spring-clock.herokuapp.com/rest/jobs/' + this.params.jobId + '/material')
+      fetch('https://spring-clock.herokuapp.com/rest/jobs/' + this.params.jobId + '/material')
         .then((response) => response.json())
         .then((responseJson) => {
-            let ds = new ListView.DataSource({rowHasChanged: (r1, r2, r3, r4, r5, r6) => r1 !== r2});
-            this.setState({
-              isLoading: false,
-              dataSource: ds.cloneWithRows(responseJson),
-            });
+          console.log(this.params.jobId);
+          let ds = new ListView.DataSource({ rowHasChanged: (r1, r2, r3, r4, r5, r6) => r1 !== r2 });
+          this.setState({
+            isLoading: false,
+            dataSource: ds.cloneWithRows(responseJson),
+          });
         })
         .catch((error) => {
-            console.error(error);
-        });  
+          console.error(error);
+        });
     }
   }
 
-  _getReceipts(id) {
-    fetch('https://spring-clock.herokuapp.com/rest/jobs/' + id + '/material')
+  _getReceipts() {
+    fetch('https://spring-clock.herokuapp.com/rest/jobs/' + 2 + '/material')
       .then((response) => response.json())
       .then((responseJson) => {
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2, r3, r4, r5, r6) => r1 !== r2});
+        let ds = new ListView.DataSource({ rowHasChanged: (r1, r2, r3, r4, r5, r6) => r1 !== r2 });
         this.setState({
           isLoading: false,
           dataSource: ds.cloneWithRows(responseJson),
@@ -46,15 +48,22 @@ class Receipts extends Component {
       });
   }
 
-  componentWillMount() { 
-    this._getReceiptsTest();
-    this.timer = setInterval(()=> this._getReceiptsTest(), 5000);
+  componentWillMount() {
   }
 
-  render() {   
+  render() {
     if (this.state.isLoading) {
       return (
-        <View style={{flex: 1, paddingTop: 20}}>
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <TouchableOpacity
+            style={styles.changeId}
+            onPress={
+              // () => navigate('Receipts', { jobId: rowData.id })
+              () => this._getReceipts()
+            }
+          >
+            <Text>{"test"}</Text>
+          </TouchableOpacity>
           <ActivityIndicator />
         </View>
       );
@@ -62,27 +71,34 @@ class Receipts extends Component {
 
     return (
       <View>
-          {this.state._getReceiptsTest()}
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(rowData) =>
-          <Text style={ styles.listStyle }>
-            <Text style={ styles.userStyle } >
-              {rowData.user + " "}
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) =>
+            <Text style={styles.listStyle}>
+              <Text style={styles.userStyle} >
+                {rowData.user + " "}
+              </Text>
+              <Text style={styles.listStyle} >
+                {"Job ID: " + rowData.jobId},
+                {"Purchased From: " + rowData.purchasedFrom},
+                {"PO #: " + rowData.poNumber},
+                {"Part Name: " + rowData.partName},
+                {"Total: " + rowData.totalPrice},
+                {"Quantity: " + rowData.quantity},
+                {"Price Per Unit: " + rowData.price},
+              </Text>
             </Text>
-
-            <Text style={ styles.listStyle } >
-              {"Job ID: " + rowData.jobId},
-              {"Purchased From: " + rowData.purchasedFrom},
-              {"PO #: " + rowData.poNumber},
-              {"Part Name: " + rowData.partName},
-              {"Total: " + rowData.totalPrice},
-              {"Quantity: " + rowData.quantity},
-              {"Price Per Unit: " + rowData.price},
-            </Text>
-          </Text>
-        }
-      />
+          }
+        />
+        <TouchableOpacity
+          style={styles.changeId}
+          onPress={
+            // () => navigate('Receipts', { jobId: rowData.id })
+            () => this._getReceipts()
+          }
+        >
+          <Text>{"test"}</Text>
+        </TouchableOpacity>
       </View>
     );
   }

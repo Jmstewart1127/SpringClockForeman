@@ -3,7 +3,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import AppHome from '../screens/AppHome';
 import Home from '../screens/Home';
-import Jobs from '../screens/Jobs';
+import JobsScreen from '../screens/JobsScreen';
 import Receipts from '../screens/Receipts';
 
 export const FeedStack = StackNavigator({
@@ -14,7 +14,7 @@ export const FeedStack = StackNavigator({
     },
   },
   Jobs: {
-    screen: Jobs,
+    screen: JobsScreen,
     navigationOptions: {
       title: 'Jobs',
     }
@@ -41,7 +41,7 @@ export const Tabs = TabNavigator({
     },
   },
   Jobs: {
-    screen: Jobs,
+    screen: JobsScreen,
     navigationOptions: {
       tabBarLabel: 'Jobs',
     }

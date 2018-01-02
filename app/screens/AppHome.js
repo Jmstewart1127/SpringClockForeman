@@ -62,8 +62,6 @@ class AppHome extends Component {
       return (
         <View style={ styles.outerScreen }>
           <Text style={ styles.componentPadding }></Text>
-          <Jobs/>
-          <Text style={ styles.componentPadding }></Text>
           <EmployeeStatus></EmployeeStatus>
           <Text style={ styles.componentPadding }></Text>
           <Text style={ styles.componentPadding }></Text>

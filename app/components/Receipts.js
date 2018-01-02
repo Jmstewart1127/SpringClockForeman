@@ -1,4 +1,4 @@
-import React, { Component }                        from 'react';
+import React, { Component } from 'react';
 import { ActivityIndicator, ListView, Text, View, ScrollView, AsyncStorage } from 'react-native';
 
 class Receipts extends Component {
@@ -7,18 +7,25 @@ class Receipts extends Component {
     this.state = {
       isLoading: true,
       bizId: '',
+      receipts: [],
     }
   }
 
-  componentWillMount() {
-    let id = await AsyncStorage.getItem('userId');
-    fetch('https://spring-clock.herokuapp.com/rest/employees/' + id)
+  componentDidMount() {
+
+  }
+
+  _getReceipts(jobId) {
+    var rec = [];
+    fetch('https://spring-clock.herokuapp.com/rest/jobs/' + jobId + '/material')
       .then((response) => response.json())
       .then((responseJson) => {
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2, r3, r4, r5, r6) => r1 !== r2});
+        console.log(jobId);
+        let ds = new ListView.DataSource({ rowHasChanged: (r1, r2, r3, r4, r5, r6) => r1 !== r2 });
         this.setState({
           isLoading: false,
           dataSource: ds.cloneWithRows(responseJson),
+          receipts: rec,
         });
       })
       .catch((error) => {
@@ -27,34 +34,36 @@ class Receipts extends Component {
   }
 
   render() {
+    const { jobId } = this.props;
+    this._getReceipts(this.props.jobId);
+    console.log(this._getReceipts(this.props.jobId));
+    // console.log(this._getReceipts(this.props.jobId));
     if (this.state.isLoading) {
       return (
-        <View style={{flex: 1, paddingTop: 20}}>
-          <ActivityIndicator />
+        <View style={{ flex: 1, paddingTop: 20 }}>
         </View>
       );
     }
-
+  
     return (
       <View>
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(rowData) =>
-          <Text style={ styles.listStyle }>
-            <Text style={ styles.userStyle } >
-              {rowData.user + " "}
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) =>
+            <Text style={styles.listStyle}>
+              <Text style={styles.userStyle} >
+                {rowData.user + " "}
+              </Text>
+              <Text style={styles.listStyle} >
+                {"Business ID: " + rowData.bizId},
+                {"Week Time: " + rowData.weekTimeInHours},
+                {"Pay Rate: " + rowData.payRate},
+                {"Period Pay: " + rowData.totalPay},
+                {"Clock In Status: " + rowData.clocked}
+              </Text>
             </Text>
-
-            <Text style={ styles.listStyle } >
-              {"Business ID: " + rowData.bizId},
-              {"Week Time: " + rowData.weekTimeInHours},
-              {"Pay Rate: " + rowData.payRate},
-              {"Period Pay: " + rowData.totalPay},
-              {"Clock In Status: " + rowData.clocked}
-            </Text>
-          </Text>
-        }
-      />
+          }
+        />
       </View>
     );
   }
